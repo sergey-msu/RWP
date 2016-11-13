@@ -1,0 +1,130 @@
+﻿<Window x:Class="RWP.App.Views.GeneralReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:enums="clr-namespace:RWP.App.Infrastructure.Enums"
+        xmlns:infr="clr-namespace:RWP.App.Infrastructure"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource GeneralReportWindowStyle}"
+        Title="{StaticResource CreateReportTitle}">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <Grid Grid.Row="0" Margin="20,0">
+      <Grid.RowDefinitions>
+        <RowDefinition Style="{StaticResource InputRowStyle}"/>
+        <RowDefinition Style="{StaticResource InputRowStyle}"/>
+        <RowDefinition Style="{StaticResource InputRowStyle}"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Style="{StaticResource InputRowStyle}"/>
+        <RowDefinition Style="{StaticResource InputRowStyle}"/>
+        <RowDefinition Style="{StaticResource InputRowStyle}"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                 Margin="0,20"
+                 Text="{StaticResource CreateReportLabel}"
+                 Style="{StaticResource MeduimHeaderTextBlockStyle}"/>
+
+      <TextBlock Grid.Row="1" Grid.Column="0"
+                 Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                 Text="{StaticResource DoctorLabel}"/>
+      <ComboBox Grid.Row="1" Grid.Column="1"
+                Style="{StaticResource InputComboBoxStyle}"
+                ItemsSource="{Binding Path=Doctors}"
+                SelectedItem="{Binding Path=SelectedDoctor, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding LastName}"/>
+              <TextBlock Text="{Binding FirstName}" Margin="5,0"/>
+              <TextBlock Text="{Binding MiddleName}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+
+      <TextBlock Grid.Row="2" Grid.Column="0"
+                 Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                 Text="{StaticResource StartDateLabel}"/>
+      <DatePicker Grid.Row="2" Grid.Column="1"
+                  HorizontalAlignment="Left"
+                  SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+      <TextBlock Grid.Row="3" Grid.Column="0"
+                 Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                 Text="{StaticResource EndDateLabel}"/>
+      <DatePicker Grid.Row="3" Grid.Column="1"
+                  HorizontalAlignment="Left"
+                  SelectedDate="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+
+
+      <TextBlock Grid.Row="4" Grid.Column="0"
+                 Margin="0,30,0,0"
+                 Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                 Text="{StaticResource ReportFontFamilyLabel}"/>
+      <ComboBox Grid.Row="4" Grid.Column="1"
+                Margin="0,30,0,3"
+                Style="{StaticResource InputComboBoxStyle}"
+                ItemsSource="{x:Static infr:Constants.FONTS}"
+                SelectedItem="{Binding SelectedFont}"/>
+
+      <TextBlock Grid.Row="5" Grid.Column="0"
+                 Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                 Text="{StaticResource ReportFontSizeLabel}"/>
+      <ComboBox Grid.Row="5" Grid.Column="1"
+                Width="50"
+                HorizontalAlignment="Left"
+                ItemsSource="{x:Static infr:Constants.FONT_SIZES}"
+                Style="{StaticResource InputComboBoxStyle}"
+                SelectedItem="{Binding SelectedFontSize}"/>
+
+      <TextBlock Grid.Row="6" Grid.Column="0"
+                 Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                 Text="{StaticResource ReportLineMarginLabel}"/>
+      <ComboBox Grid.Row="6" Grid.Column="1"
+                Width="50"
+                HorizontalAlignment="Left"
+                Style="{StaticResource InputComboBoxStyle}"
+                ItemsSource="{x:Static infr:Constants.LINE_MARGINS}"
+                SelectedItem="{Binding SelectedLineMargin}"/>
+
+      <TextBlock Grid.Row="7" Grid.Column="0"
+                 Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                 Text="{StaticResource ReportDocMarginLabel}"/>
+      <ComboBox Grid.Row="7" Grid.Column="1"
+                Width="50"
+                HorizontalAlignment="Left"
+                Style="{StaticResource InputComboBoxStyle}"
+                ItemsSource="{x:Static infr:Constants.DOC_MARGINS}"
+                SelectedItem="{Binding SelectedDocMargin}"/>
+    </Grid>
+
+    <Border Grid.Row="1"
+            Style="{StaticResource FunctionalStripeStyle}">
+      <StackPanel Orientation="Horizontal"
+                  HorizontalAlignment="Center">
+        <Button Margin="5,0"
+                Style="{StaticResource FunctionalButtonStyle}"
+                Content="{StaticResource DoCreateReportLabel}"
+                Command="{Binding CreateReportCommand}"/>
+        <Button Margin="5,0"
+                Style="{StaticResource FunctionalButtonStyle}"
+                Content="{StaticResource CancelLabel}"
+                Click="OnCancelButtonClick"/>
+      </StackPanel>
+    </Border>
+  </Grid>
+
+
+</Window>

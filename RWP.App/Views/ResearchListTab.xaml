@@ -1,0 +1,176 @@
+﻿<mvvm:RwpTabBase x:Class="RWP.App.Views.ResearchListTab"
+                 xmlns:mvvm="clr-namespace:RWP.App.Infrastructure.Mvvm"
+                 xmlns:infr="clr-namespace:RWP.App.Infrastructure"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                 Header="{StaticResource ResearchListWindowHeader}">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Toolbar -->
+    <Border Grid.Row="0"
+            Style="{StaticResource FunctionalStripeStyle}">
+      <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Foreground="{StaticResource SecondMainColor}"
+                     VerticalAlignment="Center"
+                     Margin="0,0,5,0"
+                     Text="{StaticResource ItemsOnScreenLabel}"/>
+          <ComboBox Width="50"
+                    ItemsSource="{x:Static infr:Constants.ITEMS_ON_SCREEN}"
+                    SelectedItem="{Binding Path=SelectedItemsOnScreen}"/>
+        </StackPanel>
+        <Button Margin="5,0"
+                Content="{StaticResource ClearFilterLabel}"
+                Command="{Binding Path=ClearFilterCommand}"
+                IsEnabled="{Binding Path=Filter.IsDirty}"/>
+        <Border Style="{StaticResource ToolBarSeparatorBorderStyle}"/>
+        <Button Margin="5,0"
+                Content="{StaticResource NewPatientLabel}"
+                Command="{Binding Path=NewPatientCommand}"/>
+        <Button Margin="5,0"
+                Content="{StaticResource NewPatientResearchLabel}"
+                Command="{Binding Path=NewPatientResearchCommand}"
+                IsEnabled="{Binding Path=SelectedPatient, Converter={StaticResource ObjectToIsNotNullConverter}}"/>
+      </StackPanel>
+    </Border>
+
+    <!-- Filter -->
+    <WrapPanel Grid.Row="1"
+                Margin="0,0,0,20">
+      <StackPanel Margin="5">
+        <TextBlock Text="{StaticResource PatientIDLabel}"/>
+        <TextBox Style="{StaticResource FilterTextBoxStyle}"
+                 Width="70"
+                 Text="{Binding Path=Filter.Id, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+      </StackPanel>
+      <StackPanel Margin="5">
+        <TextBlock Text="{StaticResource PatientFullNameLabel}"/>
+        <TextBox Style="{StaticResource FilterTextBoxStyle}"
+                 Text="{Binding Path=Filter.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+      </StackPanel>
+      <StackPanel Margin="5">
+        <TextBlock Text="{StaticResource PatientDOBLabel}"/>
+        <TextBox Style="{StaticResource FilterTextBoxStyle}"
+                 Text="{Binding Path=Filter.DOB, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+      </StackPanel>
+      <StackPanel Margin="5">
+        <TextBlock Text="{StaticResource PatientExaminationDateLabel}"/>
+        <TextBox Style="{StaticResource FilterTextBoxStyle}"
+                 Text="{Binding Path=Filter.ExaminationDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+      </StackPanel>
+      <StackPanel Margin="5">
+        <TextBlock Text="{StaticResource PatientResearchDateLabel}"/>
+        <TextBox Style="{StaticResource FilterTextBoxStyle}"
+                 Text="{Binding Path=Filter.ResearchDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+      </StackPanel>
+      <StackPanel Margin="5">
+        <TextBlock Text="{StaticResource ResearchConclusionLabel}"/>
+        <TextBox Style="{StaticResource FilterTextBoxStyle}"
+                 Text="{Binding Path=Filter.Conclusion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+      </StackPanel>
+    </WrapPanel>
+
+    <!-- Data -->
+    <DataGrid x:Name="_root"
+              Grid.Row="2"
+              ItemsSource="{Binding Path=Patients}"
+              SelectedItem="{Binding Path=SelectedPatient}">
+      <DataGrid.RowDetailsTemplate>
+        <DataTemplate>
+          <ItemsControl Grid.Row="0"
+                        Margin="10"
+                        Visibility="{Binding Path=Researches, Converter={StaticResource CollectionToVisibilityConverter}}"
+                        ItemsSource="{Binding Path=Researches}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Grid Margin="0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                  </Grid.ColumnDefinitions>
+                  <Button Grid.Column="0"
+                          Margin="0,0,10,0"
+                          Content="{StaticResource PatientResearchReportLabel}"
+                          Command="{Binding Path=DataContext.CreatePatientResearchReportCommand, ElementName=_root}"
+                          CommandParameter="{Binding}"/>
+                  <Button Grid.Column="1"
+                          Margin="0,0,10,0"
+                          Content="{StaticResource ViewPatientResearchDetailsLabel}"
+                          Command="{Binding Path=DataContext.ViewPatientResearchCommand, ElementName=_root}"
+                          CommandParameter="{Binding}"/>
+                  <Button Grid.Column="2"
+                          Margin="0,0,10,0"
+                          Content="{StaticResource DynamicPatientResearchDetailsLabel}"
+                          Command="{Binding Path=DataContext.DynamicPatientResearchCommand, ElementName=_root}"
+                          CommandParameter="{Binding}"/>
+                  <StackPanel Grid.Column="3"
+                              Margin="0,0,10,0"
+                              VerticalAlignment="Center"
+                              Orientation="Horizontal">
+                    <TextBlock Text="{StaticResource ExaminedLabel}"/>
+                    <TextBlock Text="{Binding Path=ExaminationDate, StringFormat={StaticResource DateFormat}}"/>
+                  </StackPanel>
+                  <StackPanel Grid.Column="4"
+                              Margin="0,0,10,0"
+                              VerticalAlignment="Center"
+                              Orientation="Horizontal">
+                    <TextBlock Text="{StaticResource ResearchedLabel}"/>
+                    <TextBlock Text="{Binding Path=ResearchDate, StringFormat={StaticResource DateFormat}}"/>
+                  </StackPanel>
+                  <TextBlock Grid.Column="5"
+                             VerticalAlignment="Center"
+                             TextWrapping="WrapWithOverflow"
+                             Text="{Binding Path=Scopes}" />
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </DataTemplate>
+      </DataGrid.RowDetailsTemplate>
+      <DataGrid.Columns>
+        <DataGridTextColumn Width="Auto" Header="{StaticResource PatientIDColumnHeader}" Binding="{Binding Entity.Id}"/>
+        <DataGridTextColumn Width="Auto" Header="{StaticResource PatientFullNameColumnHeader}" Binding="{Binding FullName}"/>
+        <DataGridTextColumn Width="Auto" Header="{StaticResource PatientDOBColumnHeader}" Binding="{Binding DOB, StringFormat={StaticResource DateFormat}}"/>
+        <DataGridTextColumn Width="*"    Header="{StaticResource PatientLastResearchDateColumnHeader}" Binding="{Binding LastResearchDate, StringFormat={StaticResource DateFormat}}"/>
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <!-- Paging -->
+    <Border Grid.Row="3"
+            Style="{StaticResource FunctionalStripeStyle}">
+      <StackPanel Grid.Row="0" Grid.Column="0"
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Center">
+        <Button Margin="5,0"
+                Style="{StaticResource PagingButtonStyle}"
+                Content="{StaticResource PageBackLabel}"
+                Command="{Binding Path=PageBackCommand}"
+                IsEnabled="{Binding Path=Pager.CanBack}"/>
+        <TextBlock Foreground="{StaticResource SecondMainColor}"
+                   Margin="5,0"
+                   VerticalAlignment="Center"
+                   Text="{Binding Path=Pager.Text}"/>
+        <Button Margin="5,0"
+                Style="{StaticResource PagingButtonStyle}"
+                Content="{StaticResource PageNextLabel}"
+                Command="{Binding Path=PageNextCommand}"
+                IsEnabled="{Binding Path=Pager.CanNext}"/>
+      </StackPanel>
+    </Border>
+
+
+  </Grid>
+
+</mvvm:RwpTabBase>

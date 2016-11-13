@@ -1,0 +1,190 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+  <system:String x:Key="ApplicationTitle">Рабочее место радиолога</system:String>
+
+  <system:String x:Key="CreateReportTitle">Создание отчета</system:String>
+  <system:String x:Key="CreateReportLabel">Отчет</system:String>
+  <system:String x:Key="ReportNameLabel">Имя</system:String>
+  <system:String x:Key="ReportTypeLabel">Тип</system:String>
+  <system:String x:Key="ReportFontFamilyLabel">Шрифт</system:String>
+  <system:String x:Key="ReportFontSizeLabel">Размер шрифта</system:String>
+  <system:String x:Key="ReportLineMarginLabel">Межстрочные отступы</system:String>
+  <system:String x:Key="ReportDocMarginLabel">Отступы</system:String>
+  <system:String x:Key="DoCreateReportLabel">Создать</system:String>
+  <system:String x:Key="PatientResearchReportName">Заключение по исследованию</system:String>
+
+  <system:String x:Key="DateFormat">dd.MM.yyyy</system:String>
+  <system:String x:Key="DateFormatString">{0:dd.MM.yyyy}</system:String>
+  <system:String x:Key="SaveLabel">Сохранить</system:String>
+  <system:String x:Key="ValidationErrorsMessage">На форме имеются ошибки валидации. Сохранение невозможно</system:String>
+  <system:String x:Key="EditInProgressMessage">Редактирование не завершено. Покинуть форму?</system:String>
+  <system:String x:Key="AreYouSureToDeleteItemMessage">Выбранный элемент будет безвозвратно удален. Продолжить?</system:String>
+  <system:String x:Key="CreateItemButtonTooltip">Создать</system:String>
+  <system:String x:Key="DeleteItemButtonTooltip">Удалить</system:String>
+  <system:String x:Key="EditItemButtonTooltip">Редактировать</system:String>
+  <system:String x:Key="FieldIsRequiredError">Поле обязательно</system:String>
+  <system:String x:Key="CloseAllTabsMenuHeader">Закрыть все вкладки</system:String>
+  <system:String x:Key="CloseAllTabsMessage">Закрыть все вкладки?</system:String>
+  <system:String x:Key="CloseAppMessage">Закрыть приложение?</system:String>
+
+  <system:String x:Key="FileMenuHeader">Файл</system:String>
+  <system:String x:Key="ExitMenuHeader">Выход</system:String>
+  <system:String x:Key="DataBaseMenuHeader">База</system:String>
+  <system:String x:Key="PatientListMenuHeader">Пациенты</system:String>
+  <system:String x:Key="ResearchesMenuHeader">Исследования</system:String>
+  <system:String x:Key="ResearchesListMenuHeader">Список</system:String>
+  <system:String x:Key="TabsMenuHeader">Вкладки</system:String>
+  <system:String x:Key="NewPatientMenuHeader">Новый пациент</system:String>
+  <system:String x:Key="ResearchTemplateMenuHeader">Шаблоны</system:String>
+  <system:String x:Key="DoctorsMenuHeader">Доктора</system:String>
+  <system:String x:Key="ScopesMenuHeader">Области</system:String>
+  <system:String x:Key="CustomersMenuHeader">Заказчики</system:String>
+  <system:String x:Key="ReportsMenuHeader">Отчеты</system:String>
+  <system:String x:Key="GeneralReportMenuHeader">Общий отчет</system:String>
+  <system:String x:Key="TabMenuHeader">Окна</system:String>
+  <system:String x:Key="HelpMenuHeader">Помощь</system:String>
+  <system:String x:Key="AboutMenuHeader">О программе</system:String>
+
+  <system:String x:Key="HelloText">Рабочее место Радиолога</system:String>
+  <system:String x:Key="CYearText">2016 (с)</system:String>
+  <system:String x:Key="DetailsLabel">Детали</system:String>
+
+  <system:String x:Key="YesLabel">Да</system:String>
+  <system:String x:Key="NoLabel">Нет</system:String>
+  <system:String x:Key="OKLabel">ОК</system:String>
+  <system:String x:Key="CancelLabel">Отмена</system:String>
+
+  <system:String x:Key="PatientListTitle">Список пациентов</system:String>
+  <system:String x:Key="PatientFullNameColumnHeader">ФИО</system:String>
+  <system:String x:Key="PatientDOBColumnHeader">Дата рождения</system:String>
+  <system:String x:Key="PatientLastResearchDateColumnHeader">Дата последнего исследования</system:String>
+  <system:String x:Key="ViewPatientResearchDetailsLabel">Подробно</system:String>
+  <system:String x:Key="DynamicPatientResearchDetailsLabel">Динамика</system:String>
+  <system:String x:Key="NewPatientLabel">Новый пациент</system:String>
+  <system:String x:Key="NewPatientResearchLabel">Новое исследование</system:String>
+
+  <system:String x:Key="NewPatientHeader">Новый пациент</system:String>
+  <system:String x:Key="EditPatientHeader">Пациент {0}</system:String>
+
+  <system:String x:Key="NewPatientResearchHeader" xml:space="preserve">Новое исследование пациента&#13;{0}</system:String>
+  <system:String x:Key="ViewPatientResearchHeader" xml:space="preserve">Исследование пациента&#x0a;{0}&#13;№{1} от {2:dd.MM.yyyy}</system:String>
+
+  <system:String x:Key="TemplateListTitle">Список шаблонов</system:String>
+  <system:String x:Key="TemplateNameLabel">Наименование</system:String>
+  <system:String x:Key="TemplateContentLabel">Содержание</system:String>
+
+  <system:String x:Key="ScopeListTitle">Список областей исследования</system:String>
+
+  <system:String x:Key="ClearFilterLabel">Очистить фильтр</system:String>
+  <system:String x:Key="FilterLabel">Фильтровать</system:String>
+  <system:String x:Key="ResearchListWindowHeader">Список исследований</system:String>
+  <system:String x:Key="DataSuccessfullySavedMessage">Данные успешно сохранены в базу</system:String>
+  <system:String x:Key="PageBackLabel">&lt;</system:String>
+  <system:String x:Key="PageNextLabel">&gt;</system:String>
+  <system:String x:Key="PagerTextFormat">Страница {0} из {1}</system:String>
+
+  <system:String x:Key="DoctorListTitle">Список докторов</system:String>
+  <system:String x:Key="DoctorFirstNameLabel">Имя</system:String>
+  <system:String x:Key="DoctorMiddleNameLabel">Отчество</system:String>
+  <system:String x:Key="DoctorLastNameLabel">Фамилия</system:String>
+  <system:String x:Key="DoctorPositionLabel">Должность</system:String>
+  <system:String x:Key="DoctorPrintLabel">Печать</system:String>
+  <system:String x:Key="DoctorNoteLabel">Примечания</system:String>
+  <system:String x:Key="DoctorHasResearchesMessage">Доктор {0} имеет исследования. Сначала удалите все исследования данного доктора</system:String>
+  <system:String x:Key="PatientHasResearchesMessage">Пациент {0} имеет исследования. Сначала удалите все исследования данного пациента</system:String>
+  <system:String x:Key="ScopeHasResearchesMessage">Имеются исследования с данной областью. Сначала удалите все такие исследования</system:String>
+  <system:String x:Key="LoadPrintImageHeader">Загрузка печати доктора</system:String>
+  <system:String x:Key="MaxImageSizeError">Размер файла не должен превышать 2 Мб</system:String>
+  <system:String x:Key="ImageFilesFilter">Изображения в формате PNG (*.png)|*.png</system:String>
+  <system:String x:Key="DeletePrintMessage">Удалить печать?</system:String>
+  <system:String x:Key="ItemIsSystemMessage">Объект не может быть удален</system:String>
+  <system:String x:Key="ExaminedLabel" xml:space="preserve">Обследован: </system:String>
+  <system:String x:Key="ResearchedLabel" xml:space="preserve">Описан: </system:String>
+
+  <system:String x:Key="CustomerListTitle">Список заказчиков</system:String>
+  <system:String x:Key="CustomerNameLabel">Имя</system:String>
+  <system:String x:Key="CustomerAddressLabel">Адрес</system:String>
+  <system:String x:Key="CustomerResearchPlaceLabel">Место (кабинет и т.п.)</system:String>
+  <system:String x:Key="CustomerContactNameLabel">Контактное лицо</system:String>
+  <system:String x:Key="CustomerContactEMailLabel">Почта</system:String>
+  <system:String x:Key="CustomerNoteLabel">Примечание</system:String>
+  <system:String x:Key="CustomerHasResearchesMessage">Заказчик {0} имеет исследования. Сначала удалите все исследования данного заказчика</system:String>
+
+  <system:String x:Key="CancelPatientResearchMessage">Закрыть исследование без сохранения?</system:String>
+
+  <system:String x:Key="CustomerLabel">Заказчик</system:String>
+  <system:String x:Key="DoctorLabel">Доктор</system:String>
+  <system:String x:Key="PatientLabel">Пациент</system:String>
+  <system:String x:Key="MedicalResearchLabel">Исследование</system:String>
+  <system:String x:Key="PatientIDLabel">ID</system:String>
+  <system:String x:Key="PatientIDColumnHeader">ID</system:String>
+  <system:String x:Key="PatientFullNameLabel">ФИО</system:String>
+  <system:String x:Key="PatientFirstNameLabel">Имя</system:String>
+  <system:String x:Key="PatientMiddleNameLabel">Отчество</system:String>
+  <system:String x:Key="PatientLastNameLabel">Фамилия</system:String>
+  <system:String x:Key="ResearchNumberLabel">Номер исследования</system:String>
+  <system:String x:Key="ResearchSliceThicknessLabel">Толщина реконструктивного среза</system:String>
+  <system:String x:Key="ResearchUseContrastLabel">Контрастное усиление</system:String>
+  <system:String x:Key="ResearchDoseLabel">ЭЭД</system:String>
+  <system:String x:Key="ResearchDoseUnitLabel">мЗв</system:String>
+  <system:String x:Key="ResearchContentLabel">Содержание</system:String>
+  <system:String x:Key="ResearchConclusionLabel">Заключение</system:String>
+  <system:String x:Key="ResearchScopeLabel">Область исследования</system:String>
+  <system:String x:Key="ResearchTemplateLabel">Шаблон</system:String>
+  <system:String x:Key="PatientDOBLabel">Дата рождения</system:String>
+  <system:String x:Key="PatientSexLabel">Пол</system:String>
+  <system:String x:Key="ResearchScanRegimeLabel">Режим сканирования</system:String>
+  <system:String x:Key="MaleLabel">муж.</system:String>
+  <system:String x:Key="FemaleLabel">жен.</system:String>
+  <system:String x:Key="PatientNoteLabel">Примечания</system:String>
+  <system:String x:Key="PatientExaminationDateLabel">Дата обследования</system:String>
+  <system:String x:Key="PatientResearchDateLabel">Дата описания</system:String>
+  <system:String x:Key="ChangeResearchTemplateMessage">Вы действительно хотите изменить шаблон содержания? Текущий текст содержания будет потерян</system:String>
+  <system:String x:Key="MillimeterLabel">мм</system:String>
+  <system:String x:Key="PatientResearchReportLabel">Отчет</system:String>
+  <system:String x:Key="TXTReportLabel">Текстовый</system:String>
+  <system:String x:Key="PDFReportLabel">PDF</system:String>
+  <system:String x:Key="DOCReportLabel">DOC</system:String>
+  <system:String x:Key="ReportFilenameFormat">{0} ({1}) от {2:dd.MM.yyyy}.{3}</system:String>
+  <system:String x:Key="GeneralReportFilenameFormat">Отчет за {0:dd.MM.yyyy}-{1:dd.MM.yyyy}.{2}</system:String>
+  <system:String x:Key="StartDateLabel">Начало периода</system:String>
+  <system:String x:Key="EndDateLabel">Окончание периода</system:String>
+
+  <system:String x:Key="ReportPatientNameFormat">ФИО: {0}</system:String>
+  <system:String x:Key="ReportPatientMale">М</system:String>
+  <system:String x:Key="ReportPatientFemale">Ж</system:String>
+  <system:String x:Key="ReportYes">да</system:String>
+  <system:String x:Key="ReportNo">нет</system:String>
+  <system:String x:Key="ReportPatientDataFormat" xml:space="preserve">Дата рождения: {0:dd.MM.yyyy}г.       Пол:{1}      Дата исследования: {2:dd.MM.yyyy}г.</system:String>
+  <system:String x:Key="ReportScopeFormat" xml:space="preserve">Область исследования: {0}</system:String>
+  <system:String x:Key="ReportScanRegimeFormat" xml:space="preserve">Режим сканирования: {0}</system:String>
+  <system:String x:Key="ReportNumberFormat" xml:space="preserve">Номер исследования: {0}</system:String>
+  <system:String x:Key="ReportThicknessFormat" xml:space="preserve">Толщина реконструктивного среза: {0}</system:String>
+  <system:String x:Key="ReportContrastFormat" xml:space="preserve">Контрастное усиление: {0}</system:String>
+  <system:String x:Key="ReportConclusionFormat" xml:space="preserve">ЗАКЛЮЧЕНИЕ: {0}</system:String>
+  <system:String x:Key="ReportDoseFormat" xml:space="preserve">ЭЭД {0}мЗв</system:String>
+  <system:String x:Key="ReportDoctorFormat" xml:space="preserve">{0}:</system:String>
+
+  <system:String x:Key="ItemsOnScreenLabel">Показывать</system:String>
+
+  <system:String x:Key="UniqueKeyViolationMessage">Запись с таким же набором уникальных полей уже присутствует в базе</system:String>
+  <system:String x:Key="DataErrorMessage">Ошибка обработки данных: {0}</system:String>
+  <system:String x:Key="RWPErrorMessage">Ошибка: {0}</system:String>
+  <system:String x:Key="CriticalErrorMessage">Критическая ошибка в процессе работы приложения</system:String>
+  <system:String x:Key="ServerConnectionMessage">Сервер БД недоступен</system:String>
+  <system:String x:Key="DbNotFoundMessage">База данных недоступна</system:String>
+  <system:String x:Key="UnauthAccessErrorMessage">Ошибка доступа к файлу. Проверьте, не открыт ли файл в другом приложении</system:String>
+
+  <system:String x:Key="UseContrastReportChar">к</system:String>
+  <system:String x:Key="GeneralReportHeaderFormat">ОТЧЕТ по количеству исследований за период {0:dd.MM.yyyy}-{1:dd.MM.yyyy}г.</system:String>
+  <system:String x:Key="GeneralReportDoctorFormat">Врач-рентгенолог {0}</system:String>
+  <system:String x:Key="GeneralReportPatientInitialsFormat">ФИО</system:String>
+  <system:String x:Key="GeneralReportResearchNumberFormat">Номер</system:String>
+  <system:String x:Key="GeneralReportResearchScopesFormat">Области исследования</system:String>
+  <system:String x:Key="GeneralReportResearchScopesCountFormat">Области суммарно</system:String>
+  <system:String x:Key="GeneralReportResearchDateFormat">Дата проведения исследования</system:String>
+  <system:String x:Key="GeneralReportFooterFormat">ВСЕГО: человек {0}, исследований {1}</system:String>
+
+</ResourceDictionary>

@@ -1,0 +1,62 @@
+﻿<Window x:Class="RWP.App.Views.RwpMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource RwpMessageBoxWindowStyle}">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock x:Name="m_MessageBlock"
+               Grid.Row="0"
+               Margin="20"
+               Style="{StaticResource MessageContentBlockStyle}"/>
+
+    <StackPanel Grid.Row="1"
+                x:Name="m_Toggle"
+                Margin="20,0,20,10"
+                Orientation="Horizontal">
+      <ToggleButton Click="OnToggleClick"
+                    Style="{StaticResource DetailsButtonStyle}"/>
+      <TextBlock Text="{StaticResource DetailsLabel}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+    </StackPanel>
+
+    <TextBox x:Name="m_DetailsBox"
+               Grid.Row="2"
+               Margin="20,0,20,10"
+               Style="{StaticResource MessageDetailsAreaTextBoxStyle}"
+               Visibility="Collapsed"/>
+
+    <Border Grid.Row="3"
+            Style="{StaticResource FunctionalStripeStyle}">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <Button x:Name="m_YesButton"
+                Margin="5,0"
+                Content="{StaticResource YesLabel}"
+                Style="{StaticResource FunctionalButtonStyle}"
+                Click="OnYesButtonClick"/>
+        <Button x:Name="m_NoButton"
+                Margin="5,0"
+                Content="{StaticResource NoLabel}"
+                Style="{StaticResource FunctionalButtonStyle}"
+                Click="OnNoButtonClick"/>
+        <Button x:Name="m_OKButton"
+                Margin="5,0"
+                Content="{StaticResource OKLabel}"
+                Style="{StaticResource FunctionalButtonStyle}"
+                Click="OnOKButtonClick"/>
+        <Button x:Name="m_CancelButton"
+                Margin="5,0"
+                Content="{StaticResource CancelLabel}"
+                Style="{StaticResource FunctionalButtonStyle}"
+                Click="OnCancelButtonClick"/>
+      </StackPanel>
+    </Border>
+  </Grid>
+
+</Window>

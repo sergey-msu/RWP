@@ -1,0 +1,290 @@
+﻿<mvvm:RwpTabBase x:Class="RWP.App.Views.PatientResearchTab"
+                 xmlns:mvvm="clr-namespace:RWP.App.Infrastructure.Mvvm"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:controls="clr-namespace:RWP.App.Infrastructure.Controls"
+                 xmlns:views="clr-namespace:RWP.App.Views"
+                 xmlns:models="clr-namespace:RWP.App.Models"
+                 Header="{Binding TabHeader}">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Toolbar -->
+    <Border Grid.Row="0"
+            Style="{StaticResource FunctionalStripeStyle}">
+      <StackPanel Orientation="Horizontal">
+        <Button Margin="5,0"
+                Content="{StaticResource PatientResearchReportLabel}"
+                Command="{Binding Path=CreateReportCommand}">
+          <Button.IsEnabled>
+            <MultiBinding Converter="{StaticResource AllConverter}">
+              <Binding Path="Research.Validator.IsValid"/>
+              <Binding Path="Research.IsDirty" Converter="{StaticResource InverseBoolConverter}"/>
+            </MultiBinding>
+          </Button.IsEnabled>
+        </Button>
+      </StackPanel>
+    </Border>
+
+    <!-- Research data area -->
+    <ScrollViewer Grid.Row="1">
+      <Grid Margin="50,0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" MinWidth="400"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0"
+                   Margin="20"
+                   Style="{StaticResource HeaderTextBlockStyle}"
+                   Text="{Binding Path=Header}"/>
+
+        <!-- General info -->
+        <Grid Grid.Row="1"
+              Margin="0,0,0,20">
+          <Grid.RowDefinitions>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+
+          <TextBlock Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                       Text="{StaticResource CustomerLabel}"/>
+          <ComboBox Grid.Row="0" Grid.Column="1"
+                      Style="{StaticResource InputComboBoxStyle}"
+                      ItemsSource="{Binding Path=Customers}"
+                      SelectedItem="{Binding Path=Research.Customer, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+
+          <TextBlock Grid.Row="1" Grid.Column="0"
+                       Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                       Text="{StaticResource DoctorLabel}"/>
+          <ComboBox Grid.Row="1" Grid.Column="1"
+                      Style="{StaticResource InputComboBoxStyle}"
+                      ItemsSource="{Binding Path=Doctors}"
+                      SelectedItem="{Binding Path=Research.Doctor, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{Binding LastName}"/>
+                  <TextBlock Text="{Binding FirstName}" Margin="5,0"/>
+                  <TextBlock Text="{Binding MiddleName}"/>
+                </StackPanel>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+
+        </Grid>
+
+        <!-- Patient info -->
+        <TextBlock Grid.Row="2"
+                   Margin="0,0,0,10"
+                   Style="{StaticResource MeduimHeaderTextBlockStyle}"
+                   Text="{StaticResource PatientLabel}"/>
+
+        <views:PatientDetailsView Grid.Row="3"
+                                  DataContext="{Binding Path=Research.Patient}"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  IsEnabled="False"/>
+
+        <!-- Medical research info -->
+        <Grid Grid.Row="4">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Style="{StaticResource InputRowStyle}"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+
+          <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
+                       Margin="0,20,0,10"
+                       Style="{StaticResource MeduimHeaderTextBlockStyle}"
+                       Text="{StaticResource MedicalResearchLabel}"/>
+
+          <TextBlock Grid.Row="1" Grid.Column="0"
+                       Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                       Text="{StaticResource ResearchNumberLabel}"/>
+          <TextBox Grid.Row="1" Grid.Column="2"
+                   Style="{StaticResource InputTextBoxStyle}"
+                   Text="{Binding Path=Research.Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+          <TextBlock Grid.Row="2" Grid.Column="0"
+                     Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                     Text="{StaticResource PatientResearchDateLabel}"/>
+          <DatePicker Grid.Row="2" Grid.Column="1"
+                      HorizontalAlignment="Left"
+                      SelectedDate="{Binding Path=Research.ResearchDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+          <TextBlock Grid.Row="3" Grid.Column="0"
+                     Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                     Text="{StaticResource PatientExaminationDateLabel}"/>
+          <DatePicker Grid.Row="3" Grid.Column="1"
+                      HorizontalAlignment="Left"
+                      SelectedDate="{Binding Path=Research.ExaminationDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+          <TextBlock Grid.Row="4" Grid.Column="0"
+                     Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                     Text="{StaticResource ResearchScopeLabel}"/>
+          <controls:MultiSelectComboBox Grid.Row="4" Grid.Column="1"
+                                        Style="{StaticResource InputMultiselectComboBoxStyle}"
+                                        Margin="0,3"
+                                        ItemsSource="{Binding Path=ResearchScopes}"
+                                        SelectedItems="{Binding Path=Research.ResearchScopes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <controls:MultiSelectComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Path=Name}"/>
+              </DataTemplate>
+            </controls:MultiSelectComboBox.ItemTemplate>
+            <controls:MultiSelectComboBox.SelectionBoxItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Path=Name}"/>
+              </DataTemplate>
+            </controls:MultiSelectComboBox.SelectionBoxItemTemplate>
+          </controls:MultiSelectComboBox>
+
+          <TextBlock Grid.Row="5" Grid.Column="0"
+                     Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                     Text="{StaticResource ResearchScanRegimeLabel}"/>
+          <controls:MultiSelectComboBox Grid.Row="5" Grid.Column="1"
+                                        Margin="0,3"
+                                        Style="{StaticResource InputMultiselectComboBoxStyle}"
+                                        ItemsSource="{Binding Path=ScanRegimes}"
+                                        SelectedItems="{Binding Path=Research.ScanRegimes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <controls:MultiSelectComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Path=Name}"/>
+              </DataTemplate>
+            </controls:MultiSelectComboBox.ItemTemplate>
+            <controls:MultiSelectComboBox.SelectionBoxItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Path=Name}"/>
+              </DataTemplate>
+            </controls:MultiSelectComboBox.SelectionBoxItemTemplate>
+          </controls:MultiSelectComboBox>
+
+          <TextBlock Grid.Row="6" Grid.Column="0"
+                     Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                     Text="{StaticResource ResearchSliceThicknessLabel}"/>
+          <StackPanel Grid.Row="6" Grid.Column="1"
+                      Orientation="Horizontal"
+                      HorizontalAlignment="Left">
+            <ComboBox MinWidth="200" 
+                      MaxWidth="300"
+                      Style="{StaticResource InputComboBoxStyle}"
+                      ItemsSource="{Binding Source={x:Static models:ResearchModel.Slices}}"
+                      SelectedItem="{Binding Path=Research.SliceThickness, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+            <TextBlock Text="{StaticResource MillimeterLabel}" 
+                       Margin="5,6,0,0" 
+                       VerticalAlignment="Center"/>
+          </StackPanel>
+
+          <TextBlock Grid.Row="7" Grid.Column="0"
+                     Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                     Text="{StaticResource ResearchUseContrastLabel}"/>
+          <CheckBox Grid.Row="7" Grid.Column="1"
+                    IsChecked="{Binding Path=Research.UseContrast, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+          <TextBlock Grid.Row="8" Grid.Column="0"
+                     Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                     Text="{StaticResource ResearchDoseLabel}"/>
+          <StackPanel Grid.Row="8" Grid.Column="1"
+                      HorizontalAlignment="Left"
+                      Height="{StaticResource InputControlHeight}"
+                      Orientation="Horizontal">
+            <TextBox Style="{StaticResource InputTextBoxStyle}"
+                     Width="70"
+                     Text="{Binding Path=Research.Dose, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+            <TextBlock Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                       Margin="5,0,0,0"
+                       Text="{StaticResource ResearchDoseUnitLabel}"/>
+          </StackPanel>
+
+          <TextBlock Grid.Row="9" Grid.Column="0"
+                     Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                     Text="{StaticResource ResearchTemplateLabel}"/>
+          <ComboBox Grid.Row="9" Grid.Column="1"
+                    MinWidth="250"
+                    Style="{StaticResource InputComboBoxStyle}"
+                    ItemsSource="{Binding Path=ResearchTemplates}"
+                    SelectedItem="{Binding Path=SelectedResearchTemplate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    DisplayMemberPath="Name"/>
+
+          <TextBlock Grid.Row="10" Grid.Column="0"
+                   Margin="0,10,0,4"
+                   Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                   Text="{StaticResource ResearchContentLabel}"/>
+          <TextBox Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2"
+                   Style="{StaticResource ResearchContentTextBoxStyle}"
+                   Text="{Binding Path=Research.Content, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+          <TextBlock Grid.Row="12" Grid.Column="0"
+                     Margin="0,10,0,4"
+                     Style="{StaticResource InputRowHeaderTextBlockStyle}"
+                     Text="{StaticResource ResearchConclusionLabel}"/>
+          <TextBox Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2"
+                   Margin="0,0,0,10"
+                   Style="{StaticResource ResearchConclusionTextBoxStyle}"
+                   Text="{Binding Path=Research.Conclusion, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        </Grid>
+      </Grid>
+    </ScrollViewer>
+
+    <!-- Save/Cancel buttons -->
+    <Border Grid.Row="2"
+            Style="{StaticResource FunctionalStripeStyle}">
+      <StackPanel Orientation="Horizontal"
+                  HorizontalAlignment="Center">
+        <Button Margin="10,0"
+                Content="{StaticResource SaveLabel}"
+                Command="{Binding SaveCommand}">
+          <Button.IsEnabled>
+            <MultiBinding Converter="{StaticResource AllConverter}">
+              <Binding Path="Research.Validator.IsValid"/>
+              <Binding Path="Research.IsDirty"/>
+            </MultiBinding>
+          </Button.IsEnabled>
+        </Button>
+        <Button Width="88"
+                Content="{StaticResource CancelLabel}"
+                Command="{Binding CancelCommand}"/>
+      </StackPanel>
+    </Border>
+
+  </Grid>
+</mvvm:RwpTabBase>

@@ -1,0 +1,1121 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    x:Class="RWP.App.Resources.Styles"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:RWP.App"
+                    xmlns:mvvm="clr-namespace:RWP.App.Infrastructure.Mvvm"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:controls="clr-namespace:RWP.App.Infrastructure.Controls">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="Images.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <!-- Constants -->
+
+  <system:Double x:Key="FontSize">14</system:Double>
+  <FontFamily x:Key="FontFamily">Verdana</FontFamily>
+  <system:Double x:Key="InputControlHeight">27</system:Double>
+  <system:Double x:Key="MenuHeight">30</system:Double>
+  <CornerRadius x:Key="CornerRadius">3</CornerRadius>
+  <CornerRadius x:Key="LeftCornerRadius">3,0,0,3</CornerRadius>
+  <CornerRadius x:Key="RightCornerRadius">0,3,3,0</CornerRadius>
+
+
+  <!-- Palette -->
+
+  <SolidColorBrush x:Key="FirstMainColor">#000000</SolidColorBrush>
+  <SolidColorBrush x:Key="TransparentColor">#00000000</SolidColorBrush>
+  <SolidColorBrush x:Key="SecondMainColor">#FFC90E</SolidColorBrush>
+  <SolidColorBrush x:Key="DarkSecondMainColor">#EC9F00</SolidColorBrush>
+  <SolidColorBrush x:Key="InputColor">#F7F2D7</SolidColorBrush>
+  <SolidColorBrush x:Key="DarkInputColor">#ECDCA4</SolidColorBrush>
+  <SolidColorBrush x:Key="LightBorderColor">#C3C3C3</SolidColorBrush>
+  <SolidColorBrush x:Key="BorderColor">#7F7F7F</SolidColorBrush>
+  <SolidColorBrush x:Key="DarkBorderColor">#000000</SolidColorBrush>
+  <SolidColorBrush x:Key="DisabledColor">#C3C3C3</SolidColorBrush>
+  <SolidColorBrush x:Key="DarkDisabledColor">#9d9d9d</SolidColorBrush>
+  <SolidColorBrush x:Key="GlyphColor">#7F7F7F</SolidColorBrush>
+  <SolidColorBrush x:Key="FontColor">#000000</SolidColorBrush>
+  <SolidColorBrush x:Key="AcceptedColor">#50D219</SolidColorBrush>
+
+  <!-- Windows -->
+
+  <Style TargetType="Window">
+    <Setter Property="WindowState" Value="Normal"/>
+    <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+    <Setter Property="FontFamily" Value="{StaticResource FontFamily}"/>
+  </Style>
+
+  <Style TargetType="Window" x:Key="ShellWindowStyle" BasedOn="{StaticResource {x:Type Window}}">
+    <Setter Property="MinHeight" Value="400"/>
+    <Setter Property="MinWidth" Value="600"/>
+    <Setter Property="WindowState" Value="Maximized"/>
+  </Style>
+
+  <Style TargetType="Window" x:Key="RwpMessageBoxWindowStyle" BasedOn="{StaticResource {x:Type Window}}">
+    <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+    <Setter Property="MaxHeight" Value="600"/>
+  </Style>
+
+  <Style TargetType="Window" x:Key="RwpSimpleMessageBoxWindowStyle" BasedOn="{StaticResource RwpMessageBoxWindowStyle}">
+    <Setter Property="ResizeMode" Value="NoResize"/>
+    <Setter Property="MinWidth" Value="250"/>
+    <Setter Property="MinHeight" Value="150"/>
+    <Setter Property="MaxWidth" Value="350"/>
+  </Style>
+
+  <Style TargetType="Window" x:Key="RwpDetailedMessageBoxWindowStyle" BasedOn="{StaticResource {x:Type Window}}">
+    <Setter Property="ResizeMode" Value="CanResize"/>
+    <Setter Property="MinWidth" Value="500"/>
+    <Setter Property="MinHeight" Value="250"/>
+    <Setter Property="MaxWidth" Value="700"/>
+  </Style>
+
+  <Style TargetType="Window" x:Key="PatientResearchReportWindowStyle" BasedOn="{StaticResource {x:Type Window}}">
+    <Setter Property="ResizeMode" Value="CanResize"/>
+    <Setter Property="MinWidth" Value="450"/>
+    <Setter Property="MinHeight" Value="350"/>
+    <Setter Property="Width" Value="450"/>
+    <Setter Property="Height" Value="350"/>
+  </Style>
+
+  <Style TargetType="Window" x:Key="GeneralReportWindowStyle" BasedOn="{StaticResource {x:Type Window}}">
+    <Setter Property="ResizeMode" Value="CanResize"/>
+    <Setter Property="MinWidth" Value="450"/>
+    <Setter Property="MinHeight" Value="400"/>
+    <Setter Property="Width" Value="450"/>
+    <Setter Property="Height" Value="400"/>
+  </Style>
+
+
+  <!-- General -->
+
+  <Style TargetType="Control" x:Key="ValidationControlStyle">
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="True">
+        <Setter Property="BorderBrush" Value="Red"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent }" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="Control" x:Key="FontSpecifiedControlStyle" BasedOn="{StaticResource ValidationControlStyle}">
+    <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+    <Setter Property="FontFamily" Value="{StaticResource FontFamily}"/>
+    <Setter Property="Foreground" Value="{StaticResource FontColor}"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+  </Style>
+
+
+  <!-- Images -->
+
+  <Style TargetType="Path" x:Key="GreenCheckMarkStyle">
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="Height" Value="12"/>
+    <Setter Property="Width" Value="12"/>
+    <Setter Property="Margin" Value="5,0,0,0" />
+    <Setter Property="Fill" Value="{StaticResource AcceptedColor}"/>
+  </Style>
+
+  <Style TargetType="Image" x:Key="PrintImageStyle">
+    <Setter Property="Height" Value="100"/>
+    <Setter Property="Width" Value="100"/>
+  </Style>
+
+  <Style TargetType="Path" x:Key="ChevronStyle">
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="Height" Value="12"/>
+    <Setter Property="Width" Value="12"/>
+    <Setter Property="Fill" Value="{StaticResource FirstMainColor}"/>
+  </Style>
+
+
+  <!-- Borders -->
+
+  <Style TargetType="Border" x:Key="ToolBarSeparatorBorderStyle">
+    <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Margin" Value="5,0"/>
+  </Style>
+
+  <Style TargetType="Border" x:Key="FunctionalStripeStyle">
+    <Setter Property="Background" Value="{StaticResource FirstMainColor}"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Padding" Value="5,10"/>
+  </Style>
+
+  <Style TargetType="Border" x:Key="PrintImageBorderStyle">
+    <Setter Property="BorderBrush" Value="DarkGray"/>
+    <Setter Property="BorderThickness" Value="1"/>
+  </Style>
+
+
+  <!-- Buttons -->
+
+  <Style TargetType="Button" x:Key="RwpButtonStyle" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border BorderThickness="0" Padding="{TemplateBinding Padding}"
+                  Background="{TemplateBinding Background}"
+                  CornerRadius="{StaticResource CornerRadius}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsPressed" Value="True">
+        <Setter Property="Background" Value="{StaticResource DarkSecondMainColor}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Background" Value="{StaticResource DisabledColor}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="Button" BasedOn="{StaticResource RwpButtonStyle}">
+    <Setter Property="Padding" Value="5"/>
+    <Setter Property="Height" Value="{StaticResource InputControlHeight}"/>
+    <Setter Property="Background" Value="{StaticResource SecondMainColor}"/>
+  </Style>
+
+  <Style TargetType="Button" x:Key="FunctionalButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
+    <Setter Property="Width" Value="88"/>
+  </Style>
+
+  <Style TargetType="Button" x:Key="ToolBarButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
+    <Setter Property="Width" Value="35"/>
+    <Setter Property="Height" Value="35"/>
+    <Setter Property="Margin" Value="5,0"/>
+  </Style>
+
+  <Style TargetType="Button" x:Key="ClearFilterButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
+    <Setter Property="Width" Value="25"/>
+    <Setter Property="Height" Value="25"/>
+    <Setter Property="Content" Value="x"/>
+    <Setter Property="Padding" Value="0"/>
+  </Style>
+
+  <Style TargetType="Button" x:Key="RemoveItemButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
+    <Setter Property="Width" Value="15"/>
+    <Setter Property="Height" Value="15"/>
+    <Setter Property="Content" Value="X"/>
+    <Setter Property="Padding" Value="0,-3,0,0"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Margin" Value="3"/>
+  </Style>
+
+  <Style TargetType="Button" x:Key="BigRemoveItemButtonStyle" BasedOn="{StaticResource RemoveItemButtonStyle}">
+    <Setter Property="Width" Value="20"/>
+    <Setter Property="Height" Value="20"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="Margin" Value="10,0,3,0"/>
+  </Style>
+
+  <Style TargetType="Button" x:Key="PagingButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
+    <Setter Property="Width" Value="50"/>
+  </Style>
+
+  <Style TargetType="ToggleButton" x:Key="DetailsButtonStyle" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="VerticalAlignment" Value="Top"/>
+    <Setter Property="Width" Value="27"/>
+    <Setter Property="Height" Value="27"/>
+    <Setter Property="Background" Value="{StaticResource SecondMainColor}"/>
+    <Setter Property="Foreground" Value="{StaticResource FirstMainColor}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ToggleButton">
+          <Grid Height="{TemplateBinding Height}"
+                Width="{TemplateBinding Width}">
+            <Ellipse Stroke="{TemplateBinding Foreground}"
+                     Fill="{TemplateBinding Background}"
+                     StrokeThickness="0"/>
+            <Path Name="Icon"
+                  Style="{StaticResource ChevronStyle}"
+                  Data="{StaticResource ChevronRight}"
+                  Margin="3,0,0,0"
+                  Stroke="{TemplateBinding Foreground}"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+              <Setter TargetName="Icon" Property="Data" Value="{StaticResource ChevronDown}"/>
+              <Setter TargetName="Icon" Property="Margin" Value="1,3,0,0"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsChecked" Value="True">
+        <Setter Property="Background" Value="{StaticResource DarkSecondMainColor}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Background" Value="{StaticResource DisabledColor}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+
+  <!-- Status Bar -->
+
+  <Style TargetType="StatusBar" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="Height" Value="{StaticResource InputControlHeight}"/>
+  </Style>
+
+
+  <!-- Menus -->
+
+  <Style TargetType="Menu" x:Key="RwpMenu" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Menu">
+          <Border Background="{TemplateBinding Background}"
+                  BorderThickness="0">
+            <StackPanel Orientation="Horizontal" IsItemsHost="True"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Background" Value="{StaticResource FirstMainColor}"/>
+    <Setter Property="Foreground" Value="{StaticResource SecondMainColor}"/>
+  </Style>
+
+  <Style TargetType="Menu" BasedOn="{StaticResource RwpMenu}">
+    <Setter Property="Height" Value="{StaticResource MenuHeight}"/>
+  </Style>
+
+
+  <!-- Menu Items -->
+
+  <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="Separator">
+    <Setter Property="Height" Value="1"/>
+    <Setter Property="Margin" Value="4"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Separator">
+          <Border BorderBrush="{StaticResource BorderColor}" BorderThickness="1"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="MenuItem">
+    <Border Name="Border">
+      <Grid>
+        <ContentPresenter Margin="5"
+                          ContentSource="Header"
+                          ContentTemplate="{TemplateBinding ItemTemplate}"
+                          VerticalAlignment="Center"
+                          RecognizesAccessKey="True" />
+        <Popup Name="Popup"
+               IsOpen="{TemplateBinding IsSubmenuOpen}"
+               Focusable="False"
+               PopupAnimation="Slide">
+          <Border Name="SubmenuBorder"
+                  Background="{TemplateBinding Background}"
+                  BorderThickness="0" >
+            <StackPanel IsItemsHost="True"/>
+          </Border>
+        </Popup>
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="IsHighlighted" Value="true">
+        <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondMainColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource FirstMainColor}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{StaticResource DisabledColor}"/>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="{x:Static MenuItem.TopLevelItemTemplateKey}" TargetType="MenuItem">
+    <Border Name="Border">
+      <Grid>
+        <ContentPresenter Margin="5"
+                          ContentSource="Header"
+                          ContentTemplate="{TemplateBinding ItemTemplate}"
+                          VerticalAlignment="Center"
+                          RecognizesAccessKey="True" />
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="IsHighlighted" Value="true">
+        <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondMainColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource FirstMainColor}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{StaticResource DisabledColor}"/>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="{x:Static MenuItem.SubmenuHeaderTemplateKey}" TargetType="MenuItem">
+    <Border Name="Border">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Icon"/>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut"/>
+          <ColumnDefinition Width="13"/>
+        </Grid.ColumnDefinitions>
+        <ContentPresenter Name="Icon"
+                          Grid.Column="0"
+                          Margin="5"
+                          VerticalAlignment="Center"
+                          ContentSource="Icon"/>
+        <ContentPresenter Name="HeaderHost"
+                          Grid.Column="1"
+                          ContentSource="Header"
+                          ContentTemplate="{TemplateBinding ItemTemplate}"
+                          VerticalAlignment="Center"
+                          RecognizesAccessKey="True"/>
+        <TextBlock Grid.Column="2"
+                   VerticalAlignment="Center"
+                   Text="{TemplateBinding InputGestureText}"
+                   Margin="5,2,2,2"
+                   DockPanel.Dock="Right"/>
+        <Path Grid.Column="3"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Data="{StaticResource RightTriangle}"
+              Fill="{StaticResource GlyphColor}" />
+        <Popup Name="Popup"
+               Placement="Right"
+               HorizontalOffset="-4"
+               IsOpen="{TemplateBinding IsSubmenuOpen}"
+               Focusable="False"
+               PopupAnimation="Slide">
+          <Border Name="SubmenuBorder"
+                  BorderThickness="0">
+            <StackPanel IsItemsHost="True"/>
+          </Border>
+        </Popup>
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="Icon" Value="{x:Null}">
+        <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+      </Trigger>
+      <Trigger Property="IsHighlighted" Value="true">
+        <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondMainColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource FirstMainColor}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{StaticResource DisabledColor}"/>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="MenuItem">
+    <Border Name="Border" >
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Icon"/>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut"/>
+          <ColumnDefinition Width="13"/>
+        </Grid.ColumnDefinitions>
+        <ContentPresenter Name="Icon"
+                          Grid.Column="0"
+                          Margin="5"
+                          VerticalAlignment="Center"
+                          ContentSource="Icon"/>
+        <Border Name="Check"
+                Grid.Column="0"
+                Width="13"
+                Height="13"
+                Visibility="Collapsed"
+                Margin="5"
+                BorderThickness="0">
+          <Path Name="CheckMark"
+                Width="7"
+                Height="7"
+                Visibility="Hidden"
+                SnapsToDevicePixels="False"
+                Stroke="{StaticResource GlyphColor}"
+                StrokeThickness="2"
+                Data="{StaticResource TwoTriangles}" />
+        </Border>
+        <ContentPresenter Name="HeaderHost"
+                          Grid.Column="1"
+                          ContentSource="Header"
+                          ContentTemplate="{TemplateBinding ItemTemplate}"
+                          VerticalAlignment="Center"
+                          RecognizesAccessKey="True"/>
+        <TextBlock Grid.Column="2"
+                   Text="{TemplateBinding InputGestureText}"
+                   Margin="5,2,0,2"
+                   DockPanel.Dock="Right" />
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="Icon" Value="{x:Null}">
+        <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+      </Trigger>
+      <Trigger Property="IsChecked" Value="true">
+        <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+      </Trigger>
+      <Trigger Property="IsCheckable" Value="true">
+        <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
+        <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+      </Trigger>
+      <Trigger Property="IsHighlighted" Value="true">
+        <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondMainColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource FirstMainColor}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{StaticResource DisabledColor}"/>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <Style TargetType="MenuItem" x:Key="RwpMenuItem" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="Height" Value="{StaticResource MenuHeight}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Background" Value="{StaticResource FirstMainColor}"/>
+    <Setter Property="Foreground" Value="{StaticResource SecondMainColor}"/>
+    <Style.Triggers>
+      <Trigger Property="Role" Value="TopLevelHeader">
+        <Setter Property="Template" Value="{StaticResource {x:Static MenuItem.TopLevelHeaderTemplateKey}}"/>
+        <Setter Property="Grid.IsSharedSizeScope" Value="true"/>
+      </Trigger>
+      <Trigger Property="Role" Value="TopLevelItem">
+        <Setter Property="Template" Value="{StaticResource {x:Static MenuItem.TopLevelItemTemplateKey}}"/>
+      </Trigger>
+      <Trigger Property="Role" Value="SubmenuHeader">
+        <Setter Property="Template" Value="{StaticResource {x:Static MenuItem.SubmenuHeaderTemplateKey}}"/>
+      </Trigger>
+      <Trigger Property="Role" Value="SubmenuItem">
+        <Setter Property="Template" Value="{StaticResource {x:Static MenuItem.SubmenuItemTemplateKey}}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="MenuItem" BasedOn="{StaticResource RwpMenuItem}">
+  </Style>
+
+
+  <!-- Text Blocks -->
+
+  <Style TargetType="Run">
+    <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+    <Setter Property="FontFamily" Value="{StaticResource FontFamily}"/>
+  </Style>
+
+  <Style TargetType="TextBlock">
+    <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+    <Setter Property="FontFamily" Value="{StaticResource FontFamily}"/>
+  </Style>
+
+  <Style TargetType="TextBlock" x:Key="InputRowHeaderTextBlockStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="Margin" Value="0,0,10,5"/>
+  </Style>
+
+  <Style TargetType="Run" x:Key="HelloAppNameBlockStyle" BasedOn="{StaticResource {x:Type Run}}">
+    <Setter Property="FontSize" Value="30"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+  </Style>
+
+  <Style TargetType="TextBlock" x:Key="HelloAppVersionBlockStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Setter Property="FontSize" Value="15"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="TextAlignment" Value="Right"/>
+  </Style>
+
+  <Style TargetType="TextBlock" x:Key="HeaderTextBlockStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Setter Property="FontSize" Value="20"/>
+    <Setter Property="TextAlignment" Value="Center"/>
+  </Style>
+
+  <Style TargetType="TextBlock" x:Key="MeduimHeaderTextBlockStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Setter Property="FontSize" Value="17"/>
+    <Setter Property="TextAlignment" Value="Center"/>
+  </Style>
+
+  <Style TargetType="TextBlock" x:Key="MessageContentBlockStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
+    <Setter Property="TextAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+  </Style>
+
+
+  <!-- Text Boxes-->
+
+  <Style TargetType="TextBox" x:Key="RwpTextBoxStyle" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="Background" Value="{StaticResource InputColor}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="2,0"/>
+    <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="AllowDrop" Value="true"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="TextBoxBase">
+          <Border Name="Border"
+                  CornerRadius="{StaticResource CornerRadius}"
+                  Padding="{TemplateBinding Padding}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Background="{TemplateBinding Background}">
+            <ScrollViewer x:Name="PART_ContentHost"
+                          Margin="0"
+                          Foreground="{TemplateBinding Foreground}"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Foreground" Value="{StaticResource DarkDisabledColor}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="TextBox" BasedOn="{StaticResource RwpTextBoxStyle}">
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+  </Style>
+
+  <Style TargetType="TextBox" x:Key="InputTextBoxStyle" BasedOn="{StaticResource {x:Type TextBox}}">
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Height" Value="{StaticResource InputControlHeight}"/>
+  </Style>
+
+  <Style TargetType="TextBox" x:Key="InputAreaTextBoxStyle" BasedOn="{StaticResource {x:Type TextBox}}">
+    <Setter Property="AcceptsReturn" Value="true"/>
+    <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+    <Setter Property="Padding" Value="2"/>
+    <Setter Property="VerticalContentAlignment" Value="Top"/>
+    <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+  </Style>
+
+  <Style TargetType="TextBox" x:Key="FilterTextBoxStyle" BasedOn="{StaticResource InputTextBoxStyle}">
+    <Setter Property="Width" Value="130"/>
+    <Setter Property="Margin" Value="0,5,0,0"/>
+  </Style>
+
+  <Style TargetType="TextBox" x:Key="SmallFilterTextBoxStyle" BasedOn="{StaticResource InputTextBoxStyle}">
+  </Style>
+
+  <Style TargetType="TextBox" x:Key="ResearchContentTextBoxStyle" BasedOn="{StaticResource InputAreaTextBoxStyle}">
+    <Setter Property="Height" Value="450"/>
+  </Style>
+
+  <Style TargetType="TextBox" x:Key="ResearchConclusionTextBoxStyle" BasedOn="{StaticResource InputAreaTextBoxStyle}">
+    <Setter Property="Height" Value="100"/>
+  </Style>
+
+  <Style TargetType="TextBox" x:Key="MessageDetailsAreaTextBoxStyle" BasedOn="{StaticResource InputAreaTextBoxStyle}">
+    <Setter Property="IsReadOnly" Value="true"/>
+    <Setter Property="FontFamily" Value="Courier New"/>
+    <Setter Property="VerticalContentAlignment" Value="Top"/>
+    <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+  </Style>
+
+
+  <!-- Password Boxes-->
+
+  <Style TargetType="PasswordBox" x:Key="RwpPasswordBoxStyle" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Background" Value="{StaticResource InputColor}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="2,0"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="PasswordBox">
+          <Grid>
+            <Border Name="Border"
+                    Padding="{TemplateBinding Padding}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{StaticResource CornerRadius}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}">
+              <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="PasswordBox" BasedOn="{StaticResource RwpPasswordBoxStyle}">
+  </Style>
+
+  <Style TargetType="PasswordBox" x:Key="InputPasswordBoxStyle" BasedOn="{StaticResource {x:Type PasswordBox}}">
+    <Setter Property="Height" Value="{StaticResource InputControlHeight}"/>
+  </Style>
+
+
+  <!-- DatePickers -->
+
+  <Style TargetType="{x:Type DatePickerTextBox}">
+    <!--<Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <TextBox x:Name="PART_TextBox"
+                   Text="{Binding Path=SelectedDate, StringFormat='dd.MM.yyyy',
+                   RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>-->
+  </Style>
+
+  <Style TargetType="DatePicker" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="Height" Value="{StaticResource InputControlHeight}"/>
+    <Setter Property="Width" Value="135"/>
+  </Style>
+
+
+  <!-- Tab Contols -->
+
+  <Style TargetType="TabItem" x:Key="RwpTabItemStyle">
+    <Setter Property="Padding" Value="5,0,0,0"/>
+    <Setter Property="Height" Value="{StaticResource MenuHeight}"/>
+    <Setter Property="AllowDrop" Value="True"/>
+    <!--<EventSetter Event="PreviewMouseMove" Handler="TabItem_PreviewMouseMove"/>
+    <EventSetter Event="Drop" Handler="TabItem_Drop"/>-->
+    <Setter Property="HeaderTemplate">
+      <Setter.Value>
+        <DataTemplate DataType="{x:Type TabItem}">
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Text="{Binding}"/>
+            <Button Style="{StaticResource BigRemoveItemButtonStyle}"
+                    Command="{Binding Source={x:Static local:RwpRoot.Context}, Path=CloseTabCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type mvvm:RwpTabBase}}}"/>
+          </StackPanel>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!--<Style TargetType="TabItem" x:Key="RwpTabItem" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="HeaderTemplate">
+      <Setter.Value>
+        <DataTemplate DataType="{x:Type TabItem}">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Header}"/>
+            <Button Content="X"
+                            Style="{StaticResource RemoveItemButtonStyle}"
+                            CommandParameter="{Binding}"/>
+          </StackPanel>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="TabItem">
+          <Grid Name="Panel">
+            <StackPanel Orientation="Horizontal">
+              <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                ContentSource="Header"
+                                ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                Margin="10,2"/>
+              <Button Content="X"/>
+            </StackPanel>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+              <Setter TargetName="Panel" Property="Background" Value="{StaticResource SecondMainColor}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+              <Setter TargetName="Panel" Property="Background" Value="{StaticResource FirstMainColor}" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="TabItem" BasedOn="{StaticResource RwpTabItem}">
+  </Style>
+
+  <Style x:Key="RwpTabControl" TargetType="TabControl" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="TabControl">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    BorderBrush="{TemplateBinding BorderBrush}">
+              <Border Background="{TemplateBinding Background}">
+                <ContentPresenter ContentSource="SelectedContent"/>
+              </Border>
+            </Border>
+            <TabPanel Grid.Row="0" IsItemsHost="true"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="TabControl" BasedOn="{StaticResource RwpTabControl}">
+  </Style>-->
+
+
+  <!-- Combo Boxes-->
+
+  <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxToggleButtonTemplate">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="20"/>
+      </Grid.ColumnDefinitions>
+      <Border Name="Border"
+              Grid.Column="0"
+              BorderBrush="{StaticResource BorderColor}"
+              CornerRadius="{StaticResource LeftCornerRadius}"
+              BorderThickness="1,1,0,1"
+              Background="{StaticResource InputColor}">
+      </Border>
+      <Border Name="ButtonBorder"
+              Grid.Column="1"
+              CornerRadius="{StaticResource RightCornerRadius}"
+              BorderThickness="0,1,1,1"
+              BorderBrush="{StaticResource BorderColor}"
+              Background="{StaticResource InputColor}">
+      </Border>
+      <Path Name="Arrow"
+            Grid.Column="1"
+            Data="{StaticResource Arrow}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Fill="{StaticResource GlyphColor}"/>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="IsChecked" Value="True">
+        <Setter Property="Background" TargetName="ButtonBorder" Value="{StaticResource DarkInputColor}"/>
+        <Setter Property="Background" TargetName="Border" Value="{StaticResource DarkInputColor}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Foreground" Value="{StaticResource DarkDisabledColor}"/>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <Style TargetType="ComboBoxItem">
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBoxItem">
+          <Border Name="Border"
+                  Height="{StaticResource InputControlHeight}">
+            <ContentPresenter Margin="5,0,0,0"
+                              VerticalAlignment="Center"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+              <Setter Property="Background" TargetName="Border" Value="{StaticResource DarkInputColor}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="AppComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+    <Setter Property="Background" Value="{StaticResource InputColor}"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBox">
+          <Grid>
+            <ToggleButton Name="ToggleButton"
+                          ClickMode="Press"
+                          Focusable="False"
+                          IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                          Template="{StaticResource ComboBoxToggleButtonTemplate}"/>
+            <ContentPresenter Name="ContentSite"
+                              Margin="5,0,23,0"
+                              IsHitTestVisible="False"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Content="{TemplateBinding SelectionBoxItem}"
+                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
+            <TextBox Name="PART_EditableTextBox"
+                     Margin="5,0,23,0"
+                     IsReadOnly="{TemplateBinding IsReadOnly}"
+                     Visibility="Hidden"
+                     Background="Transparent"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Center">
+              <TextBox.Template>
+                <ControlTemplate TargetType="TextBox" >
+                  <Border Name="PART_ContentHost" Focusable="False"/>
+                </ControlTemplate>
+              </TextBox.Template>
+            </TextBox>
+            <Popup Name="Popup"
+                   Placement="Bottom"
+                   Focusable="False"
+                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                   PopupAnimation="Slide">
+              <Grid Name="DropDown"
+                    MinWidth="{TemplateBinding ActualWidth}"
+                    MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                <Border Name="DropDownBorder"
+                        Background="{StaticResource InputColor}"
+                        BorderThickness="0.5"
+                        BorderBrush="{StaticResource BorderColor}"/>
+                <ScrollViewer Margin="1">
+                  <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                </ScrollViewer>
+              </Grid>
+            </Popup>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="HasItems" Value="False">
+              <Setter Property="MinHeight" TargetName="DropDownBorder" Value="95"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Foreground" Value="{StaticResource DarkDisabledColor}"/>
+            </Trigger>
+            <Trigger Property="IsGrouping" Value="True">
+              <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+            </Trigger>
+            <Trigger Property="IsEditable" Value="True">
+              <Setter Property="IsTabStop" Value="False"/>
+              <Setter Property="Visibility" TargetName="PART_EditableTextBox" Value="Visible"/>
+              <Setter Property="Visibility" TargetName="ContentSite" Value="Hidden"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="ComboBox" BasedOn="{StaticResource AppComboBoxStyle}">
+  </Style>
+
+  <Style TargetType="ComboBox" x:Key="InputComboBoxStyle" BasedOn="{StaticResource {x:Type ComboBox}}">
+    <Setter Property="Height" Value="{StaticResource InputControlHeight}"/>
+  </Style>
+
+  <Style TargetType="{x:Type controls:MultiSelectComboBox}" x:Key="InputMultiselectComboBoxStyle" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="MinHeight" Value="{StaticResource InputControlHeight}"/>
+    <Setter Property="Background" Value="{StaticResource InputColor}"/>
+    <Setter Property="RemoveItemButtonStyle" Value="{StaticResource RemoveItemButtonStyle}"/>
+  </Style>
+
+
+  <!-- Check Boxes -->
+
+  <Style TargetType="CheckBox" x:Key="RwpCheckBox" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="Background" Value="{StaticResource InputColor}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CheckBox">
+          <StackPanel Orientation="Horizontal">
+            <Border BorderBrush="{StaticResource BorderColor}"
+                    BorderThickness="1"
+                    Background="{TemplateBinding Background}"
+                    VerticalAlignment="Center"
+                    Width="15"
+                    Height="15"
+                    Padding="2">
+              <Path Name="CheckMark"
+                    Stretch="Fill"
+                    Fill="{StaticResource FirstMainColor}"
+                    Data="{StaticResource CheckMark}"/>
+            </Border>
+            <ContentPresenter VerticalAlignment="Center" Margin="10,0,0,0" />
+          </StackPanel>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="False">
+              <Setter TargetName="CheckMark" Property="Data" Value="" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="CheckBox" BasedOn="{StaticResource RwpCheckBox}">
+  </Style>
+
+  <Style TargetType="CheckBox" x:Key="InputCheckBoxStyle" BasedOn="{StaticResource {x:Type CheckBox}}">
+    <Setter Property="Height" Value="{StaticResource InputControlHeight}"/>
+  </Style>
+
+
+  <!-- Grids-->
+
+  <Style TargetType="GridSplitter" x:Key="VerticalGridSplitterStyle">
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="Width" Value="5"/>
+    <Setter Property="Background" Value="{StaticResource TransparentColor}"/>
+  </Style>
+
+  <Style TargetType="RowDefinition" x:Key="InputRowStyle">
+    <Setter Property="Height" Value="35"/>
+  </Style>
+
+
+  <!-- Data Grids-->
+
+  <Style TargetType="DataGridColumnHeader">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Height" Value="35"/>
+    <Setter Property="SeparatorBrush" Value="{StaticResource BorderColor}"/>
+    <Setter Property="Background" Value="{StaticResource FirstMainColor}"/>
+    <Setter Property="Foreground" Value="{StaticResource SecondMainColor}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DataGridColumnHeader">
+          <Grid>
+            <Border Name="Border"
+                    BorderThickness="1,0,0,0"
+                    Padding="3,0"
+                    Width="{TemplateBinding Width}"
+                    BorderBrush="{StaticResource BorderColor}"
+                    Background="{TemplateBinding Background}">
+              <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+			                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondMainColor}"/>
+              <Setter Property="Foreground" Value="{StaticResource FirstMainColor}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="DataGridCell">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DataGridCell">
+          <Border Name="Border"
+                  BorderThickness="0"
+                  BorderBrush="{StaticResource BorderColor}"
+                  Padding="5,0"
+                  Background="{TemplateBinding Background}">
+            <ContentPresenter VerticalAlignment="Center" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Border" Property="Background" Value="{StaticResource DarkInputColor}"/>
+              <Setter Property="Foreground" Value="{StaticResource FirstMainColor}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="DataGridRow">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="Background" Value="{StaticResource InputColor}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DataGridRow">
+          <Border Name="Border"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="0"
+                  Background="{TemplateBinding Background}">
+            <SelectiveScrollingGrid>
+              <SelectiveScrollingGrid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+              </SelectiveScrollingGrid.ColumnDefinitions>
+              <SelectiveScrollingGrid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+              </SelectiveScrollingGrid.RowDefinitions>
+              <DataGridCellsPresenter Grid.Row="0" Grid.Column="1"
+                                      ItemsPanel="{TemplateBinding ItemsPanel}"/>
+              <DataGridDetailsPresenter Grid.Row="1" Grid.Column="1"
+                                        SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        Visibility="{TemplateBinding DetailsVisibility}"/>
+              <DataGridRowHeader Grid.RowSpan="2"
+                                 SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                 Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+            </SelectiveScrollingGrid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+              <Setter Property="Background" Value="{StaticResource DarkInputColor}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="DataGrid" x:Key="RwpDataGrid" BasedOn="{StaticResource FontSpecifiedControlStyle}">
+    <Setter Property="RowStyle" Value="{StaticResource {x:Type DataGridRow}}"/>
+    <Setter Property="CellStyle" Value="{StaticResource {x:Type DataGridCell}}"/>
+    <Setter Property="ColumnHeaderStyle" Value="{StaticResource {x:Type DataGridColumnHeader}}"/>
+  </Style>
+
+  <Style TargetType="DataGrid" BasedOn="{StaticResource RwpDataGrid}">
+    <Setter Property="AutoGenerateColumns" Value="False"/>
+    <Setter Property="SelectionMode" Value="Single"/>
+    <Setter Property="HeadersVisibility" Value="Column"/>
+    <Setter Property="CanUserAddRows" Value="False"/>
+    <Setter Property="CanUserDeleteRows" Value="False"/>
+    <Setter Property="CanUserResizeRows" Value="False"/>
+    <Setter Property="IsReadOnly" Value="True"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="GridLinesVisibility" Value="All"/>
+    <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BorderColor}"/>
+    <Setter Property="VerticalGridLinesBrush" Value="{StaticResource BorderColor}"/>
+    <Setter Property="RowHeight" Value="{StaticResource InputControlHeight}"/>
+  </Style>
+
+  <Style TargetType="CheckBox" x:Key="RwpDataGridCheckBoxStyle">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CheckBox">
+          <Path Name="CheckMark"
+                Style="{StaticResource GreenCheckMarkStyle}"
+                Data="{StaticResource CheckMark}"/>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="False">
+              <Setter TargetName="CheckMark" Property="Data" Value="" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

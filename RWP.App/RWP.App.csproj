@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{42AE221E-BD1E-4FE7-89FD-0B75DB6C7A9F}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RWP.App</RootNamespace>
+    <AssemblyName>RWP.App</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\3rdparty\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Infrastructure\Controls\MultiSelectComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Strings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Converters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GeneralReportWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PatientResearchReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ItemListTabBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PatientDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CustomerDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DoctorDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ResearchListTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PatientResearchTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RwpMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScopeDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TemplateDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ShellWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Infrastructure\Converters\ObjectToIsNotNullConverter.cs" />
+    <Compile Include="Infrastructure\Converters\TabToMenuItemConverter.cs" />
+    <Compile Include="Infrastructure\Converters\CollectionToHasItemsConverter.cs" />
+    <Compile Include="Infrastructure\ErrorHandler.cs" />
+    <Compile Include="Infrastructure\Interfaces.cs" />
+    <Compile Include="Models\GeneralReportItemModel.cs" />
+    <Compile Include="Models\Pager.cs" />
+    <Compile Include="Models\ReportSettingsModel.cs" />
+    <Compile Include="Models\ScopeModel.cs" />
+    <Compile Include="Reporting\DOCReportBase.cs" />
+    <Compile Include="Reporting\FontFactory.cs" />
+    <Compile Include="Reporting\Reports\GeneralPDFReport.cs" />
+    <Compile Include="Reporting\Reports\PatientResearchPDFReport.cs" />
+    <Compile Include="Reporting\TXTReportBase.cs" />
+    <Compile Include="Reporting\PDFReportBase.cs" />
+    <Compile Include="Reporting\ReportBase.cs" />
+    <Compile Include="Reporting\IReport.cs" />
+    <Compile Include="Resources\Styles.xaml.cs">
+      <DependentUpon>Styles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RwpRoot.cs" />
+    <Compile Include="Infrastructure\Mvvm\RwpTabBase.cs" />
+    <Compile Include="Infrastructure\NavigationManager.cs" />
+    <Compile Include="Infrastructure\Exceptions.cs" />
+    <Compile Include="Infrastructure\TabManager.cs" />
+    <Compile Include="RwpContext.cs" />
+    <Compile Include="Infrastructure\Attributes\EnumDescriptionKeyAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\EnumDescriptionAttribute.cs" />
+    <Compile Include="Infrastructure\Controls\MultiSelectComboBox.xaml.cs">
+      <DependentUpon>MultiSelectComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Converters\AllBoolConverter.cs" />
+    <Compile Include="Infrastructure\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Infrastructure\Converters\EnumToDescriptionConverter.cs" />
+    <Compile Include="Infrastructure\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Infrastructure\Converters\CollectionToVisibilityConverter.cs" />
+    <Compile Include="Infrastructure\Converters\InverseBoolConverter.cs" />
+    <Compile Include="Infrastructure\Converters\IsNullToVisibilityConverter.cs" />
+    <Compile Include="Infrastructure\Converters\StringTruncateConverter.cs" />
+    <Compile Include="Infrastructure\Enums\Sex.cs" />
+    <Compile Include="Infrastructure\Mvvm\DelegateCommand.cs" />
+    <Compile Include="Infrastructure\Mvvm\ItemListViewModelBase.cs" />
+    <Compile Include="Infrastructure\Mvvm\ModelBase.cs" />
+    <Compile Include="Infrastructure\Mvvm\NotifierBase.cs" />
+    <Compile Include="Infrastructure\Mvvm\ValidatableBase.cs" />
+    <Compile Include="Infrastructure\Mvvm\Validator.cs" />
+    <Compile Include="Infrastructure\Mvvm\ViewModelBase.cs" />
+    <Compile Include="Infrastructure\Utils.cs" />
+    <Compile Include="Models\PatientFilterModel.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\DoctorModel.cs" />
+    <Compile Include="Models\PatientModel.cs" />
+    <Compile Include="Models\ResearchModel.cs" />
+    <Compile Include="Models\TemplateModel.cs" />
+    <Compile Include="Models\PatientListItemModel.cs" />
+    <Compile Include="Models\ResearchListItemModel.cs" />
+    <Compile Include="Infrastructure\Constants.cs" />
+    <Compile Include="ViewModels\GeneralReportViewModel.cs" />
+    <Compile Include="ViewModels\PatientResearchReportViewModel.cs" />
+    <Compile Include="ViewModels\CustomerListViewModel.cs" />
+    <Compile Include="ViewModels\PatientListViewModel.cs" />
+    <Compile Include="ViewModels\DoctorListViewModel.cs" />
+    <Compile Include="ViewModels\ScopeListViewModel.cs" />
+    <Compile Include="ViewModels\TemplateListViewModel.cs" />
+    <Compile Include="ViewModels\PatientResearchViewModel.cs" />
+    <Compile Include="ViewModels\ResearchListViewModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\GeneralReportWindow.xaml.cs">
+      <DependentUpon>GeneralReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PatientResearchReportWindow.xaml.cs">
+      <DependentUpon>PatientResearchReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ItemListTabs.cs" />
+    <Compile Include="Views\ItemListTabBase.xaml.cs">
+      <DependentUpon>ItemListTabBase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PatientDetailsView.xaml.cs">
+      <DependentUpon>PatientDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerDetailsView.xaml.cs">
+      <DependentUpon>CustomerDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DoctorDetailsView.xaml.cs">
+      <DependentUpon>DoctorDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResearchListTab.xaml.cs">
+      <DependentUpon>ResearchListTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PatientResearchTab.xaml.cs">
+      <DependentUpon>PatientResearchTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RwpMessageBox.xaml.cs">
+      <DependentUpon>RwpMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScopeDetailsView.xaml.cs">
+      <DependentUpon>ScopeDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TemplateDetailsView.xaml.cs">
+      <DependentUpon>TemplateDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShellWindow.xaml.cs">
+      <DependentUpon>ShellWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="Resources\Fonts\TIMCYR.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\TIMCYRB.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\TIMCYRBI.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\TIMCYRI.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\ARIAL.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\ARIALBD.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\ARIALBI.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\ARIALI.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RWP.Data\RWP.Data.csproj">
+      <Project>{f5c31f0a-75e8-4b44-8ba1-241ca365f283}</Project>
+      <Name>RWP.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

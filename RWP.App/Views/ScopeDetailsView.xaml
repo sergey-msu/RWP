@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="RWP.App.Views.ScopeDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Style="{StaticResource InputRowStyle}"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <TextBlock Grid.Row="0" Grid.Column="0"
+               Style="{StaticResource InputRowHeaderTextBlockStyle}"
+               Text="{StaticResource TemplateNameLabel}"/>
+    <TextBox Grid.Row="0" Grid.Column="1"
+             Style="{StaticResource InputTextBoxStyle}"
+             Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+  </Grid>
+
+</UserControl>

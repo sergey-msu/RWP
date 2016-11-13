@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RWP" Class="DataContext" AccessModifier="Internal" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sql;Initial Catalog=RWP;Integrated Security=True" SettingsObjectName="RWP.Data.Properties.Settings" SettingsPropertyName="RWPConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Attachment" Member="Attachments">
+    <Type Name="Attachment">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="Attachment_MedicalResearchAttachment" Member="MedicalResearchAttachments" ThisKey="Id" OtherKey="IdAttachment" Type="MedicalResearchAttachment" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ScanRegime" Member="ScanRegimes">
+    <Type Name="ScanRegime">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsSystem" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ScanRegime_MedicalScanRegime" Member="MedicalScanRegimes" ThisKey="Id" OtherKey="IdScanRegime" Type="MedicalScanRegime" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(450) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="ResearchPlace" Type="System.String" DbType="NVarChar(450)" CanBeNull="true" />
+      <Column Name="ContactName" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="ContactEMail" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="Customer_MedicalResearch" Member="MedicalResearches" ThisKey="Id" OtherKey="IdCustomer" Type="MedicalResearch" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Doctor" Member="Doctors">
+    <Type Name="Doctor">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Position" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="[Print]" Member="Print" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(2048)" CanBeNull="true" />
+      <Association Name="Doctor_MedicalResearch" Member="MedicalResearches" ThisKey="Id" OtherKey="IdDoctor" Type="MedicalResearch" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MedicalResearch" Member="MedicalResearches">
+    <Type Name="MedicalResearch">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdCustomer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdDoctor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdPatient" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdResearchTemplate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExaminationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ResearchDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Number" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="SliceThickness" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="UseContrast" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Dose" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Conclusion" Type="System.String" DbType="NVarChar(2048) NOT NULL" CanBeNull="false" />
+      <Association Name="MedicalResearch_MedicalResearchAttachment" Member="MedicalResearchAttachments" ThisKey="Id" OtherKey="IdMedicalResearch" Type="MedicalResearchAttachment" />
+      <Association Name="MedicalResearch_MedicalResearchScope" Member="MedicalResearchScopes" ThisKey="Id" OtherKey="IdMedicalResearch" Type="MedicalResearchScope" />
+      <Association Name="MedicalResearch_MedicalScanRegime" Member="MedicalScanRegimes" ThisKey="Id" OtherKey="IdMedicalResearch" Type="MedicalScanRegime" />
+      <Association Name="MedicalResearch_ReportSetting" Member="ReportSettings" ThisKey="Id" OtherKey="IdMedicalResearch" Type="ReportSetting" />
+      <Association Name="Customer_MedicalResearch" Member="Customer" ThisKey="IdCustomer" OtherKey="Id" Type="Customer" IsForeignKey="true" />
+      <Association Name="Doctor_MedicalResearch" Member="Doctor" ThisKey="IdDoctor" OtherKey="Id" Type="Doctor" IsForeignKey="true" />
+      <Association Name="Patient_MedicalResearch" Member="Patient" ThisKey="IdPatient" OtherKey="Id" Type="Patient" IsForeignKey="true" />
+      <Association Name="ResearchTemplate_MedicalResearch" Member="ResearchTemplate" ThisKey="IdResearchTemplate" OtherKey="Id" Type="ResearchTemplate" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MedicalResearchAttachment" Member="MedicalResearchAttachments">
+    <Type Name="MedicalResearchAttachment">
+      <Column Name="IdMedicalResearch" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdAttachment" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Attachment_MedicalResearchAttachment" Member="Attachment" ThisKey="IdAttachment" OtherKey="Id" Type="Attachment" IsForeignKey="true" />
+      <Association Name="MedicalResearch_MedicalResearchAttachment" Member="MedicalResearch" ThisKey="IdMedicalResearch" OtherKey="Id" Type="MedicalResearch" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MedicalResearchScope" Member="MedicalResearchScopes">
+    <Type Name="MedicalResearchScope">
+      <Column Name="IdMedicalResearch" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdResearchScope" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="MedicalResearch_MedicalResearchScope" Member="MedicalResearch" ThisKey="IdMedicalResearch" OtherKey="Id" Type="MedicalResearch" IsForeignKey="true" />
+      <Association Name="ResearchScope_MedicalResearchScope" Member="ResearchScope" ThisKey="IdResearchScope" OtherKey="Id" Type="ResearchScope" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MedicalScanRegime" Member="MedicalScanRegimes">
+    <Type Name="MedicalScanRegime">
+      <Column Name="IdMedicalResearch" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdScanRegime" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="MedicalResearch_MedicalScanRegime" Member="MedicalResearch" ThisKey="IdMedicalResearch" OtherKey="Id" Type="MedicalResearch" IsForeignKey="true" />
+      <Association Name="ScanRegime_MedicalScanRegime" Member="ScanRegime" ThisKey="IdScanRegime" OtherKey="Id" Type="ScanRegime" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Patient" Member="Patients">
+    <Type Name="Patient">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Sex" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(2048)" CanBeNull="true" />
+      <Association Name="Patient_MedicalResearch" Member="MedicalResearches" ThisKey="Id" OtherKey="IdPatient" Type="MedicalResearch" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportSettings" Member="ReportSettings">
+    <Type Name="ReportSetting">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdMedicalResearch" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Settings" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="MedicalResearch_ReportSetting" Member="MedicalResearch" ThisKey="IdMedicalResearch" OtherKey="Id" Type="MedicalResearch" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ResearchScope" Member="ResearchScopes">
+    <Type Name="ResearchScope">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsSystem" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ResearchScope_MedicalResearchScope" Member="MedicalResearchScopes" ThisKey="Id" OtherKey="IdResearchScope" Type="MedicalResearchScope" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ResearchTemplate" Member="ResearchTemplates">
+    <Type Name="ResearchTemplate">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(450) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsSystem" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ResearchTemplate_MedicalResearch" Member="MedicalResearches" ThisKey="Id" OtherKey="IdResearchTemplate" Type="MedicalResearch" />
+    </Type>
+  </Table>
+</Database>

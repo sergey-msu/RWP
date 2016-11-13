@@ -1,0 +1,93 @@
+﻿<Window x:Class="RWP.App.Views.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mvvm="clr-namespace:RWP.App.Infrastructure.Mvvm"
+        xmlns:res="clr-namespace:RWP.App.Infrastructure"
+        xmlns:local="clr-namespace:RWP.App"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource ShellWindowStyle}"
+        Title="{StaticResource ApplicationTitle}">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Main menu region -->
+    <Menu Grid.Row="0">
+      <MenuItem Header="{StaticResource FileMenuHeader}">
+        <MenuItem Header="{StaticResource ExitMenuHeader}"
+                          Command="{Binding Path=ExitCommand}"/>
+      </MenuItem>
+      <MenuItem Header="{StaticResource DataBaseMenuHeader}">
+        <MenuItem Header="{StaticResource PatientListMenuHeader}"
+                          Command="{Binding Path=ShowPatientListCommand}"/>
+        <MenuItem Header="{StaticResource ResearchTemplateMenuHeader}"
+                          Command="{Binding Path=ShowTemplateListCommand}"/>
+        <MenuItem Header="{StaticResource ScopesMenuHeader}"
+                          Command="{Binding Path=ShowScopesListCommand}"/>
+        <MenuItem Header="{StaticResource DoctorsMenuHeader}"
+                          Command="{Binding Path=ShowDoctorListCommand}"/>
+        <MenuItem Header="{StaticResource CustomersMenuHeader}"
+                          Command="{Binding Path=ShowCustomerListCommand}"/>
+      </MenuItem>
+      <MenuItem Header="{StaticResource ResearchesMenuHeader}">
+        <MenuItem Header="{StaticResource ResearchesListMenuHeader}"
+                  Command="{Binding Path=ShowResearchesListCommand}"/>
+      </MenuItem>
+
+      <MenuItem Header="{StaticResource ReportsMenuHeader}">
+        <MenuItem Header="{StaticResource GeneralReportMenuHeader}"
+                  Command="{Binding Path=CreateGeneralReportCommand}"/>
+      </MenuItem>
+
+      <MenuItem Header="{StaticResource TabsMenuHeader}"
+                IsEnabled="{Binding Source={x:Static local:RwpRoot.Context}, Path=Tabs, Converter={StaticResource CollectionToHasItemsConverter}}">
+        <MenuItem.ItemsSource>
+          <CompositeCollection>
+            <MenuItem Header="{StaticResource CloseAllTabsMenuHeader}"
+                      Command="{Binding Path=CloseAllTabsCommand}"/>
+            <Separator/>
+            <CollectionContainer Collection="{Binding Source={x:Static local:RwpRoot.Context}, Path=Tabs, Converter={StaticResource TabToMenuItemConverter}}" />
+          </CompositeCollection>
+        </MenuItem.ItemsSource>
+      </MenuItem>
+
+      <MenuItem Header="{StaticResource HelpMenuHeader}">
+        <MenuItem Header="{StaticResource AboutMenuHeader}"/>
+      </MenuItem>
+    </Menu>
+
+    <!-- Main region -->
+    <Grid Grid.Row="1">
+
+      <!-- Hello Message -->
+      <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                  Visibility="{Binding Source={x:Static local:RwpRoot.Context}, Path=Tabs, Converter={StaticResource CollectionToVisibilityConverter}, ConverterParameter=False}">
+        <TextBlock>
+          <Run Text="RAD" Foreground="{StaticResource SecondMainColor}" Style="{StaticResource HelloAppNameBlockStyle}"/>
+          <Run Text="Workplace" Foreground="{StaticResource FirstMainColor}" Style="{StaticResource HelloAppNameBlockStyle}"/>
+        </TextBlock>
+        <TextBlock Text="v1.0" Foreground="{StaticResource SecondMainColor}" Style="{StaticResource HelloAppVersionBlockStyle}"/>
+      </StackPanel>
+
+
+      <!-- Tabs -->
+      <TabControl x:Name="_hostTabControl" TabStripPlacement="Top"
+                  Visibility="{Binding Source={x:Static local:RwpRoot.Context}, Path=Tabs, Converter={StaticResource CollectionToVisibilityConverter}, ConverterParameter=True}">
+      </TabControl>
+
+    </Grid>
+
+    <!-- Status bar region -->
+    <StatusBar Grid.Row="2">
+      <StatusBarItem>
+        <TextBlock Text="{Binding Path=Status, Source={x:Static local:RwpContext.Instance}}"/>
+      </StatusBarItem>
+    </StatusBar>
+
+  </Grid>
+
+</Window>
